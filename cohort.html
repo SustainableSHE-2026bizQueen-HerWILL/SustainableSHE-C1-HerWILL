@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cohort 1 — Sustainable SHE</title>
+  <meta name="description" content="Meet the 25 Syrian women entrepreneurs of Sustainable SHE Cohort 1." />
+  <link rel="icon" href="images/logo.jpg" type="image/jpeg" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="ltr">
+<div class="announcement-bar">
+  <span class="en-text">🌿 Explore all products on our <a href="https://padlet.com/bshemeans/SustainablesheC1" target="_blank" rel="noopener">Padlet</a></span>
+  <span class="ar-text">🌿 استعرضي كل المنتجات على <a href="https://padlet.com/bshemeans/SustainablesheC1" target="_blank" rel="noopener">بادلت</a></span>
+</div>
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-brand">
+      <img src="images/logo.jpg" alt="Sustainable SHE" class="navbar-logo" />
+      <div><div class="navbar-site-name">Sustainable SHE</div><div class="navbar-site-sub en-text">Initiative</div><div class="navbar-site-sub ar-text">المبادرة</div></div>
+    </a>
+    <div class="navbar-menu">
+      <a href="index.html" class="nav-link"><span class="en-text">Home</span><span class="ar-text">الرئيسية</span></a>
+      <a href="about.html" class="nav-link"><span class="en-text">About</span><span class="ar-text">عن المبادرة</span></a>
+      <a href="impact.html" class="nav-link"><span class="en-text">Impact Stories</span><span class="ar-text">قصص التأثير</span></a>
+      <a href="cohort.html" class="nav-link"><span class="en-text">Cohort 1</span><span class="ar-text">ريادياتنا</span></a>
+      <a href="contact.html" class="nav-link"><span class="en-text">Contact</span><span class="ar-text">تواصلي معنا</span></a>
+      <button class="lang-toggle" id="langToggle">عربي</button>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="mobileNavClose">✕</button>
+  <a href="index.html" class="nav-link"><span class="en-text">Home</span><span class="ar-text">الرئيسية</span></a>
+  <a href="about.html" class="nav-link"><span class="en-text">About</span><span class="ar-text">عن المبادرة</span></a>
+  <a href="impact.html" class="nav-link"><span class="en-text">Impact Stories</span><span class="ar-text">قصص التأثير</span></a>
+  <a href="cohort.html" class="nav-link"><span class="en-text">Cohort 1</span><span class="ar-text">ريادياتنا</span></a>
+  <a href="contact.html" class="nav-link"><span class="en-text">Contact</span><span class="ar-text">تواصلي معنا</span></a>
+  <button class="lang-toggle" id="mobileLangToggle">عربي</button>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <h1><span class="en-text">Meet Cohort 1</span><span class="ar-text">تعرفي على الكوهرت الأولى</span></h1>
+    <p class="subtitle"><span class="en-text">25 Syrian women entrepreneurs. 7+ governorates. One shared commitment.</span><span class="ar-text">25 رائدة أعمال سورية. أكثر من 7 محافظات. التزام مشترك واحد.</span></p>
+  </div>
+</section>
+
+<!-- PADLET SECTION -->
+<section class="padlet-section">
+  <div class="container">
+    <h3><span class="en-text">Browse All Products &amp; Projects</span><span class="ar-text">استعرضي كل المنتجات والمشاريع</span></h3>
+    <p><span class="en-text">Our interactive showcase displays every entrepreneur's work — products, photos, and contact links in one place.</span><span class="ar-text">عرضنا التفاعلي يُظهر عمل كل رائدة — منتجات وصور وروابط تواصل في مكان واحد.</span></p>
+    <a href="https://padlet.com/bshemeans/SustainablesheC1" target="_blank" rel="noopener" class="btn btn-primary">
+      <span class="en-text">🔗 Open Full Product Showcase</span>
+      <span class="ar-text">🔗 افتحي عرض المنتجات الكامل</span>
+    </a>
+  </div>
+</section>
+
+<!-- FILTER + GRID -->
+<section class="section">
+  <div class="container">
+    <div class="filter-bar">
+      <input type="text" id="searchBox" class="search-box"
+        placeholder="Search by name, project, or city…"
+        aria-label="Search entrepreneurs" />
+      <span class="results-count" id="cardCount">Showing 25 entrepreneurs</span>
+    </div>
+    <div id="cohortGrid" class="grid-5">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2><span class="en-text">Ready to join Cohort 2?</span><span class="ar-text">مستعدة للانضمام إلى الكوهرت الثاني؟</span></h2>
+    <p><span class="en-text">Applications are open for Syrian women breadwinners with a skill or a business idea.</span><span class="ar-text">التسجيل مفتوح للمرأة السورية المعيلة التي لديها مهارة أو فكرة أعمال.</span></p>
+    <div class="cta-buttons">
+      <a href="https://forms.gle/3joATj8JVJ9GvSSq5" target="_blank" rel="noopener" class="btn btn-gold"><span class="en-text">Apply Now</span><span class="ar-text">قدمي الآن</span></a>
+      <a href="contact.html" class="btn btn-outline"><span class="en-text">Contact Us</span><span class="ar-text">تواصلي معنا</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo.jpg" alt="Sustainable SHE" class="footer-logo" />
+        <div class="footer-name">Sustainable SHE</div>
+        <p class="footer-slogans">Her zip code is Syria. Her market is the world.<br/>One Euro-Med commitment. Built inside Syria.</p>
+        <p class="footer-slogans" style="margin-top:0.25rem;">رمزها البريدي سوريا. سوقها العالم.<br/>التزام أورو متوسطي واحد. مبني داخل سوريا.</p>
+      </div>
+      <div class="footer-funders">
+        <div class="funders-label"><span class="en-text">Funded by</span><span class="ar-text">ممولة من</span></div>
+        <div class="funders-row">
+          <div class="funder-item"><img src="images/alf-logo.png" alt="Anna Lindh Foundation" class="funder-logo-img" /></div>
+          <div class="funder-divider"></div>
+          <div class="funder-item"><img src="images/mdre-logo.png" alt="Med Dialogue" class="funder-logo-img" /></div>
+        </div>
+        <div class="footer-support-label"><span class="en-text">Supported by</span><span class="ar-text">مدعومة من</span></div>
+        <a href="https://www.herwill.org/about-herwill" target="_blank" rel="noopener" class="herwill-link">HerWILL</a>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" class="footer-link"><span class="en-text">Home</span><span class="ar-text">الرئيسية</span></a>
+        <a href="about.html" class="footer-link"><span class="en-text">About</span><span class="ar-text">عن المبادرة</span></a>
+        <a href="impact.html" class="footer-link"><span class="en-text">Impact Stories</span><span class="ar-text">قصص التأثير</span></a>
+        <a href="cohort.html" class="footer-link"><span class="en-text">Meet Cohort 1</span><span class="ar-text">ريادياتنا</span></a>
+        <a href="contact.html" class="footer-link"><span class="en-text">Contact</span><span class="ar-text">تواصلي معنا</span></a>
+        <div class="footer-socials"><a href="https://www.instagram.com/bizqueen2026" target="_blank" rel="noopener" aria-label="Instagram">📷</a></div>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <span>© 2025 Sustainable SHE Initiative. All rights reserved.</span>
+      <span><span class="en-text">Implemented under Syrian Youth Assembly (SYA)</span><span class="ar-text">مُنفَّذة تحت مظلة الجمعية السورية للشباب</span></span>
+    </div>
+  </div>
+</footer>
+<button id="scrollTop" aria-label="Back to top">↑</button>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
