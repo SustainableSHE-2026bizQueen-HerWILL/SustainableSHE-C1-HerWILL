@@ -491,3 +491,19 @@ p  { color: var(--text-secondary); margin-bottom: 1em; }
   h1        { font-size: 1.9rem; }
   .hero-tagline-1 { font-size: 0.98rem; }
 }
+
+/* === ENTREPRENEUR PHOTO === */
+.ent-photo {
+  width: 70px; height: 70px; border-radius: 50%;
+  object-fit: cover; object-position: top center;
+  border: 3px solid rgba(255,255,255,0.35);
+  margin: 0 auto 0.6rem; display: block;
+}
+
+/* === FUNDER LOGOS (real images) === */
+.funder-logo-img {
+  height: 44px; width: auto; max-width: 130px;
+  object-fit: contain; filter: brightness(0) invert(1);
+  opacity: 0.92;
+}
+.funder-logo-img:hover { opacity: 1; }
