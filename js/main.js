@@ -1,117 +1,63 @@
 /* =============================================
-   SUSTAINABLE SHE — Main JavaScript
-   Language toggle, mobile nav, scroll top
+   SUSTAINABLE SHE — Main JavaScript v1.1
+   Language toggle, mobile nav, cards with photos
    ============================================= */
 
-// ---- Language Management ----
 const LANG_KEY = 'she_lang';
-
-function getLang() {
-  return localStorage.getItem(LANG_KEY) || 'en';
-}
+function getLang() { return localStorage.getItem(LANG_KEY) || 'en'; }
 
 function applyLang(lang) {
   const body = document.body;
   if (lang === 'ar') {
-    body.classList.remove('ltr');
-    body.classList.add('rtl');
-    document.documentElement.setAttribute('lang', 'ar');
-    document.documentElement.setAttribute('dir', 'rtl');
+    body.classList.remove('ltr'); body.classList.add('rtl');
+    document.documentElement.setAttribute('lang','ar');
+    document.documentElement.setAttribute('dir','rtl');
   } else {
-    body.classList.remove('rtl');
-    body.classList.add('ltr');
-    document.documentElement.setAttribute('lang', 'en');
-    document.documentElement.setAttribute('dir', 'ltr');
+    body.classList.remove('rtl'); body.classList.add('ltr');
+    document.documentElement.setAttribute('lang','en');
+    document.documentElement.setAttribute('dir','ltr');
   }
-  // Update toggle button label
-  const toggle = document.getElementById('langToggle');
-  if (toggle) toggle.textContent = lang === 'ar' ? 'EN' : 'عربي';
-
-  const mobileToggle = document.getElementById('mobileLangToggle');
-  if (mobileToggle) mobileToggle.textContent = lang === 'ar' ? 'EN' : 'عربي';
-
+  document.getElementById('langToggle')       && (document.getElementById('langToggle').textContent       = lang==='ar'?'EN':'عربي');
+  document.getElementById('mobileLangToggle') && (document.getElementById('mobileLangToggle').textContent = lang==='ar'?'EN':'عربي');
   localStorage.setItem(LANG_KEY, lang);
 }
 
-function toggleLang() {
-  const current = getLang();
-  applyLang(current === 'en' ? 'ar' : 'en');
-}
+function toggleLang() { applyLang(getLang()==='en'?'ar':'en'); }
 
-// ---- Mobile Menu ----
-function openMobileMenu() {
-  const menu = document.getElementById('mobileNav');
-  if (menu) {
-    menu.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-}
+function openMobileMenu()  { const m=document.getElementById('mobileNav'); if(m){m.classList.add('open');    document.body.style.overflow='hidden';} }
+function closeMobileMenu() { const m=document.getElementById('mobileNav'); if(m){m.classList.remove('open'); document.body.style.overflow='';} }
 
-function closeMobileMenu() {
-  const menu = document.getElementById('mobileNav');
-  if (menu) {
-    menu.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-}
-
-// ---- Scroll Top ----
 function handleScrollTop() {
-  const btn = document.getElementById('scrollTop');
-  if (!btn) return;
-  if (window.scrollY > 400) {
-    btn.classList.add('show');
-  } else {
-    btn.classList.remove('show');
-  }
+  const btn=document.getElementById('scrollTop');
+  if(!btn)return;
+  btn.classList.toggle('show', window.scrollY>400);
 }
 
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ---- Cohort Card Renderer ----
 function getInitials(name) {
-  const parts = name.split(' ');
-  if (parts.length === 1) return parts[0][0].toUpperCase();
-  return (parts[0][0] + parts[1][0]).toUpperCase();
-}
-
-function renderCohortGrid() {
-  const grid = document.getElementById('cohortGrid');
-  if (!grid || typeof entrepreneurs === 'undefined') return;
-
-  const lang = getLang();
-  renderCards(entrepreneurs, grid, lang);
+  const p=name.trim().split(' ');
+  return p.length===1 ? p[0][0].toUpperCase() : (p[0][0]+p[1][0]).toUpperCase();
 }
 
 function renderCards(data, container, lang) {
-  container.innerHTML = '';
+  container.innerHTML='';
   data.forEach(e => {
-    const name    = lang === 'ar' ? e.nameAr    : e.nameEn;
-    const project = lang === 'ar' ? e.projectAr : e.projectEn;
-    const tagline = lang === 'ar' ? e.taglineAr : e.taglineEn;
-    const loc     = lang === 'ar' ? e.locationAr : e.location;
+    const name    = lang==='ar' ? e.nameAr    : e.nameEn;
+    const project = lang==='ar' ? e.projectAr : e.projectEn;
+    const tagline = lang==='ar' ? e.taglineAr : e.taglineEn;
+    const loc     = lang==='ar' ? e.locationAr: e.location;
 
-    let links = '';
-    if (e.wa) {
-      const waLabel = lang === 'ar' ? 'واتساب' : 'WhatsApp';
-      links += `<a href="https://wa.me/${e.wa}" target="_blank" rel="noopener" class="soc-link wa">📱 ${waLabel}</a>`;
-    }
-    if (e.ig) {
-      links += `<a href="https://instagram.com/${e.ig}" target="_blank" rel="noopener" class="soc-link ig">📷 Instagram</a>`;
-    }
-    if (e.fb) {
-      links += `<a href="https://facebook.com/${e.fb}" target="_blank" rel="noopener" class="soc-link fb">📘 Facebook</a>`;
-    }
+    const avatar = e.photo
+      ? `<img src="${e.photo}" alt="${e.nameEn}" class="ent-photo" loading="lazy" />`
+      : `<div class="ent-initials">${getInitials(e.nameEn)}</div>`;
 
-    container.innerHTML += `
+    let links='';
+    if(e.wa)  links+=`<a href="https://wa.me/${e.wa}"               target="_blank" rel="noopener" class="soc-link wa">📱 ${lang==='ar'?'واتساب':'WhatsApp'}</a>`;
+    if(e.ig)  links+=`<a href="https://instagram.com/${e.ig}"       target="_blank" rel="noopener" class="soc-link ig">📷 Instagram</a>`;
+    if(e.fb)  links+=`<a href="https://facebook.com/${e.fb}"        target="_blank" rel="noopener" class="soc-link fb">📘 Facebook</a>`;
+
+    container.innerHTML+=`
       <div class="entrepreneur-card">
-        <div class="ent-head">
-          <div class="ent-initials">${getInitials(e.nameEn)}</div>
-          <div class="ent-name">${name}</div>
-          <div class="ent-project">${project}</div>
-        </div>
+        <div class="ent-head">${avatar}<div class="ent-name">${name}</div><div class="ent-project">${project}</div></div>
         <div class="ent-body">
           <p class="ent-tagline">${tagline}</p>
           <p class="ent-location">📍 ${loc}</p>
@@ -119,116 +65,79 @@ function renderCards(data, container, lang) {
         </div>
       </div>`;
   });
-
-  const count = document.getElementById('cardCount');
-  if (count) {
-    count.textContent = lang === 'ar'
-      ? `عرض ${data.length} رائدة أعمال`
-      : `Showing ${data.length} entrepreneur${data.length !== 1 ? 's' : ''}`;
-  }
+  const count=document.getElementById('cardCount');
+  if(count) count.textContent = lang==='ar'
+    ? `عرض ${data.length} رائدة أعمال`
+    : `Showing ${data.length} entrepreneur${data.length!==1?'s':''}`;
 }
 
-// ---- Search Filter (cohort page) ----
+function renderCohortGrid() {
+  const grid=document.getElementById('cohortGrid');
+  if(!grid||typeof entrepreneurs==='undefined')return;
+  renderCards(entrepreneurs, grid, getLang());
+}
+
 function initSearch() {
-  const box = document.getElementById('searchBox');
-  if (!box || typeof entrepreneurs === 'undefined') return;
-
-  box.addEventListener('input', () => {
-    const q    = box.value.toLowerCase().trim();
-    const lang = getLang();
-    const filtered = q
-      ? entrepreneurs.filter(e =>
-          e.nameEn.toLowerCase().includes(q) ||
-          e.nameAr.toLowerCase().includes(q) ||
-          e.projectEn.toLowerCase().includes(q) ||
-          e.projectAr.toLowerCase().includes(q) ||
-          e.location.toLowerCase().includes(q) ||
-          e.locationAr.includes(q) ||
-          e.taglineEn.toLowerCase().includes(q)
-        )
-      : entrepreneurs;
-
-    const grid = document.getElementById('cohortGrid');
-    if (grid) renderCards(filtered, grid, lang);
+  const box=document.getElementById('searchBox');
+  if(!box||typeof entrepreneurs==='undefined')return;
+  box.addEventListener('input',()=>{
+    const q=box.value.toLowerCase().trim();
+    const lang=getLang();
+    const f=q ? entrepreneurs.filter(e=>
+      e.nameEn.toLowerCase().includes(q)||e.nameAr.includes(q)||
+      e.projectEn.toLowerCase().includes(q)||e.projectAr.includes(q)||
+      e.location.toLowerCase().includes(q)||e.locationAr.includes(q)
+    ) : entrepreneurs;
+    renderCards(f, document.getElementById('cohortGrid'), lang);
   });
 }
 
-// ---- Active Nav Link ----
 function markActiveNav() {
-  const current = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-link').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && (href === current || (current === '' && href === 'index.html'))) {
-      link.classList.add('active');
-    }
+  const cur=window.location.pathname.split('/').pop()||'index.html';
+  document.querySelectorAll('.nav-link').forEach(link=>{
+    const h=link.getAttribute('href');
+    if(h&&(h===cur||(cur===''&&h==='index.html'))) link.classList.add('active');
   });
 }
 
-// ---- Intersection Observer — subtle fade in ----
 function initFadeIn() {
-  if (!('IntersectionObserver' in window)) return;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        observer.unobserve(entry.target);
+  if(!('IntersectionObserver' in window))return;
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        en.target.style.opacity='1';
+        en.target.style.transform='translateY(0)';
+        obs.unobserve(en.target);
       }
     });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.card-fade').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(el);
+  },{threshold:0.1});
+  document.querySelectorAll('.card-fade').forEach(el=>{
+    el.style.opacity='0'; el.style.transform='translateY(20px)';
+    el.style.transition='opacity 0.5s ease, transform 0.5s ease';
+    obs.observe(el);
   });
 }
 
-// ---- Init ----
-document.addEventListener('DOMContentLoaded', () => {
-  // Apply saved or default language
+document.addEventListener('DOMContentLoaded',()=>{
   applyLang(getLang());
-
-  // Language toggle buttons
-  document.getElementById('langToggle')?.addEventListener('click', toggleLang);
-  document.getElementById('mobileLangToggle')?.addEventListener('click', () => {
-    toggleLang();
-    closeMobileMenu();
-  });
-
-  // Mobile menu
-  document.getElementById('hamburger')?.addEventListener('click', openMobileMenu);
-  document.getElementById('mobileNavClose')?.addEventListener('click', closeMobileMenu);
-
-  // Close mobile menu when nav link clicked
-  document.querySelectorAll('.mobile-nav .nav-link').forEach(link => {
-    link.addEventListener('click', closeMobileMenu);
-  });
-
-  // Scroll top button
+  document.getElementById('langToggle')       ?.addEventListener('click', toggleLang);
+  document.getElementById('mobileLangToggle') ?.addEventListener('click', ()=>{toggleLang();closeMobileMenu();});
+  document.getElementById('hamburger')        ?.addEventListener('click', openMobileMenu);
+  document.getElementById('mobileNavClose')   ?.addEventListener('click', closeMobileMenu);
+  document.querySelectorAll('.mobile-nav .nav-link').forEach(l=>l.addEventListener('click',closeMobileMenu));
   window.addEventListener('scroll', handleScrollTop);
-  document.getElementById('scrollTop')?.addEventListener('click', scrollToTop);
-
-  // Mark active page in nav
+  document.getElementById('scrollTop')?.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
   markActiveNav();
-
-  // Cohort page
-  if (typeof entrepreneurs !== 'undefined') {
-    renderCohortGrid();
-    initSearch();
-  }
-
-  // Fade animations
+  if(typeof entrepreneurs!=='undefined'){ renderCohortGrid(); initSearch(); }
   initFadeIn();
 });
 
-// Re-render cohort cards when language changes (override applyLang)
-const _applyLang = applyLang;
-window.applyLang = function(lang) {
-  _applyLang(lang);
-  if (typeof entrepreneurs !== 'undefined') {
-    const grid = document.getElementById('cohortGrid');
-    if (grid) renderCards(entrepreneurs, grid, lang);
+// Re-render on lang change
+const _orig=applyLang;
+window.applyLang=function(lang){
+  _orig(lang);
+  if(typeof entrepreneurs!=='undefined'){
+    const g=document.getElementById('cohortGrid');
+    if(g) renderCards(entrepreneurs,g,lang);
   }
 };
